@@ -15,7 +15,14 @@
           <h1 id="timerTitle">집중 타이머</h1>
           <p class="subtitle">분과 초를 입력한 뒤 원하는 시간만큼 집중하세요.</p>
         </div>
-        <div id="status" class="status-pill" aria-live="polite">대기</div>
+
+        <div class="header-actions">
+          <button id="themeToggle" class="theme-toggle" type="button" aria-label="다크 모드로 변경">
+            <span id="themeIcon" aria-hidden="true">☀</span>
+            <span id="themeText">화이트</span>
+          </button>
+          <div id="status" class="status-pill" aria-live="polite">대기</div>
+        </div>
       </div>
 
       <div class="timer-face" id="timerFace" aria-label="남은 시간">

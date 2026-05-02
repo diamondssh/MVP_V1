@@ -4,6 +4,9 @@ const timeDisplay = document.getElementById("timeDisplay");
 const timerFace = document.getElementById("timerFace");
 const status = document.getElementById("status");
 const message = document.getElementById("message");
+const themeToggle = document.getElementById("themeToggle");
+const themeIcon = document.getElementById("themeIcon");
+const themeText = document.getElementById("themeText");
 
 const startBtn = document.getElementById("startBtn");
 const pauseBtn = document.getElementById("pauseBtn");
@@ -14,6 +17,26 @@ let totalSeconds = 0;
 let initialSeconds = 0;
 let timerId = null;
 let isPaused = false;
+
+function getPreferredTheme() {
+  const savedTheme = localStorage.getItem("timer-theme");
+
+  if (savedTheme === "light" || savedTheme === "dark") {
+    return savedTheme;
+  }
+
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  localStorage.setItem("timer-theme", theme);
+
+  const isDark = theme === "dark";
+  themeIcon.textContent = isDark ? "☾" : "☀";
+  themeText.textContent = isDark ? "블랙" : "화이트";
+  themeToggle.setAttribute("aria-label", isDark ? "화이트 모드로 변경" : "블랙 모드로 변경");
+}
 
 function formatTime(seconds) {
   const minutes = Math.floor(seconds / 60);
@@ -114,6 +137,11 @@ function readDuration() {
   return { duration };
 }
 
+themeToggle.addEventListener("click", () => {
+  const currentTheme = document.documentElement.dataset.theme;
+  applyTheme(currentTheme === "dark" ? "light" : "dark");
+});
+
 startBtn.addEventListener("click", () => {
   const result = readDuration();
 
@@ -177,5 +205,6 @@ resetBtn.addEventListener("click", () => {
   });
 });
 
+applyTheme(getPreferredTheme());
 setState("initial");
 updateDisplay(0);
