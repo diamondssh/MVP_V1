@@ -3,333 +3,48 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>브라우저 타이머</title>
-
-  <style>
-    /* 기본 화면 설정 */
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: Arial, sans-serif;
-      background: #f4f6fb;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-
-    /* 타이머 카드 */
-    .timer-container {
-      width: 100%;
-      max-width: 420px;
-      background: #ffffff;
-      padding: 32px 24px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-      text-align: center;
-    }
-
-    h1 {
-      margin: 0 0 24px;
-      font-size: 28px;
-      color: #222;
-    }
-
-    /* 남은 시간 표시 */
-    .time-display {
-      font-size: 64px;
-      font-weight: bold;
-      color: #111;
-      margin-bottom: 24px;
-      letter-spacing: 2px;
-    }
-
-    /* 입력 영역 */
-    .input-group {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-
-    .input-box {
-      flex: 1;
-      text-align: left;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 14px;
-      color: #555;
-    }
-
-    input {
-      width: 100%;
-      padding: 12px;
-      font-size: 18px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      text-align: center;
-    }
-
-    input:disabled {
-      background: #eee;
-      cursor: not-allowed;
-    }
-
-    /* 버튼 영역 */
-    .button-group {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-
-    button {
-      padding: 13px;
-      font-size: 16px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      color: white;
-      transition: 0.2s;
-    }
-
-    button:hover {
-      opacity: 0.85;
-    }
-
-    button:disabled {
-      background: #bbb;
-      cursor: not-allowed;
-      opacity: 1;
-    }
-
-    .start {
-      background: #2563eb;
-    }
-
-    .pause {
-      background: #f59e0b;
-    }
-
-    .resume {
-      background: #16a34a;
-    }
-
-    .reset {
-      background: #dc2626;
-    }
-
-    /* 알림 메시지 */
-    .message {
-      margin-top: 20px;
-      font-size: 16px;
-      font-weight: bold;
-      color: #dc2626;
-      min-height: 24px;
-    }
-
-    /* 모바일 대응 */
-    @media (max-width: 480px) {
-      .timer-container {
-        padding: 28px 18px;
-      }
-
-      .time-display {
-        font-size: 52px;
-      }
-
-      .input-group {
-        flex-direction: column;
-      }
-
-      .button-group {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+  <title>집중 타이머</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-  <div class="timer-container">
-    <h1>타이머</h1>
-
-    <!-- 남은 시간 표시 -->
-    <div id="timeDisplay" class="time-display">00:00</div>
-
-    <!-- 분/초 입력 -->
-    <div class="input-group">
-      <div class="input-box">
-        <label for="minutes">분</label>
-        <input id="minutes" type="number" min="0" placeholder="0" />
+  <main>
+    <section class="timer-container" aria-labelledby="timerTitle">
+      <div class="title-row">
+        <div>
+          <h1 id="timerTitle">집중 타이머</h1>
+          <p class="subtitle">분과 초를 입력한 뒤 원하는 시간만큼 집중하세요.</p>
+        </div>
+        <div id="status" class="status-pill" aria-live="polite">대기</div>
       </div>
 
-      <div class="input-box">
-        <label for="seconds">초</label>
-        <input id="seconds" type="number" min="0" max="59" placeholder="0" />
+      <div class="timer-face" id="timerFace" aria-label="남은 시간">
+        <div id="timeDisplay" class="time-display" aria-live="polite">00:00</div>
       </div>
-    </div>
 
-    <!-- 버튼 -->
-    <div class="button-group">
-      <button id="startBtn" class="start">시작</button>
-      <button id="pauseBtn" class="pause" disabled>일시정지</button>
-      <button id="resumeBtn" class="resume" disabled>재개</button>
-      <button id="resetBtn" class="reset">초기화</button>
-    </div>
+      <div class="input-group">
+        <div>
+          <label for="minutes">분</label>
+          <input id="minutes" type="number" min="0" max="999" inputmode="numeric" placeholder="0" />
+        </div>
 
-    <!-- 상태 메시지 -->
-    <div id="message" class="message"></div>
-  </div>
+        <div>
+          <label for="seconds">초</label>
+          <input id="seconds" type="number" min="0" max="59" inputmode="numeric" placeholder="0" />
+        </div>
+      </div>
 
-  <script>
-    // DOM 요소 가져오기
-    const minutesInput = document.getElementById("minutes");
-    const secondsInput = document.getElementById("seconds");
-    const timeDisplay = document.getElementById("timeDisplay");
-    const message = document.getElementById("message");
+      <div class="button-group">
+        <button id="startBtn" class="start" type="button">시작</button>
+        <button id="pauseBtn" class="pause" type="button" disabled>일시정지</button>
+        <button id="resumeBtn" class="resume" type="button" disabled>계속</button>
+        <button id="resetBtn" class="reset" type="button">초기화</button>
+      </div>
 
-    const startBtn = document.getElementById("startBtn");
-    const pauseBtn = document.getElementById("pauseBtn");
-    const resumeBtn = document.getElementById("resumeBtn");
-    const resetBtn = document.getElementById("resetBtn");
+      <div id="message" class="message" role="status" aria-live="polite"></div>
+    </section>
+  </main>
 
-    // 타이머 상태 변수
-    let totalSeconds = 0;
-    let timerId = null;
-    let isPaused = false;
-
-    // MM:SS 형식으로 화면에 표시하는 함수
-    function updateDisplay(seconds) {
-      const minutes = Math.floor(seconds / 60);
-      const remainSeconds = seconds % 60;
-
-      const formattedMinutes = String(minutes).padStart(2, "0");
-      const formattedSeconds = String(remainSeconds).padStart(2, "0");
-
-      timeDisplay.textContent = `${formattedMinutes}:${formattedSeconds}`;
-    }
-
-    // 입력창 활성화/비활성화 처리
-    function setInputsDisabled(disabled) {
-      minutesInput.disabled = disabled;
-      secondsInput.disabled = disabled;
-    }
-
-    // 버튼 상태 변경 함수
-    function setButtonState(state) {
-      if (state === "initial") {
-        startBtn.disabled = false;
-        pauseBtn.disabled = true;
-        resumeBtn.disabled = true;
-      }
-
-      if (state === "running") {
-        startBtn.disabled = true;
-        pauseBtn.disabled = false;
-        resumeBtn.disabled = true;
-      }
-
-      if (state === "paused") {
-        startBtn.disabled = true;
-        pauseBtn.disabled = true;
-        resumeBtn.disabled = false;
-      }
-    }
-
-    // 타이머 실행 함수
-    function runTimer() {
-      timerId = setInterval(() => {
-        totalSeconds--;
-        updateDisplay(totalSeconds);
-
-        // 시간이 0이 되면 타이머 종료
-        if (totalSeconds <= 0) {
-          clearInterval(timerId);
-          timerId = null;
-
-          message.textContent = "시간이 종료되었습니다!";
-          alert("시간이 종료되었습니다!");
-
-          setInputsDisabled(false);
-          setButtonState("initial");
-        }
-      }, 1000);
-    }
-
-    // 시작 버튼 클릭
-    startBtn.addEventListener("click", () => {
-      const minutes = Number(minutesInput.value) || 0;
-      const seconds = Number(secondsInput.value) || 0;
-
-      totalSeconds = minutes * 60 + seconds;
-
-      // 0초 이하 입력 방지
-      if (totalSeconds <= 0) {
-        message.textContent = "1초 이상 입력해 주세요.";
-        return;
-      }
-
-      // 초 입력값 검증
-      if (seconds < 0 || seconds > 59) {
-        message.textContent = "초는 0부터 59 사이로 입력해 주세요.";
-        return;
-      }
-
-      message.textContent = "";
-      isPaused = false;
-
-      updateDisplay(totalSeconds);
-      setInputsDisabled(true);
-      setButtonState("running");
-
-      runTimer();
-    });
-
-    // 일시정지 버튼 클릭
-    pauseBtn.addEventListener("click", () => {
-      if (timerId !== null) {
-        clearInterval(timerId);
-        timerId = null;
-        isPaused = true;
-
-        message.textContent = "일시정지 상태입니다.";
-        setButtonState("paused");
-      }
-    });
-
-    // 재개 버튼 클릭
-    resumeBtn.addEventListener("click", () => {
-      if (isPaused && totalSeconds > 0) {
-        message.textContent = "";
-        isPaused = false;
-
-        setButtonState("running");
-        runTimer();
-      }
-    });
-
-    // 초기화 버튼 클릭
-    resetBtn.addEventListener("click", () => {
-      clearInterval(timerId);
-
-      timerId = null;
-      totalSeconds = 0;
-      isPaused = false;
-
-      minutesInput.value = "";
-      secondsInput.value = "";
-
-      updateDisplay(0);
-      message.textContent = "";
-
-      setInputsDisabled(false);
-      setButtonState("initial");
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
