@@ -3,60 +3,201 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="집중 타이머는 공부, 업무, 운동, 휴식 시간을 간단하게 관리할 수 있는 무료 온라인 타이머입니다." />
+  <meta name="robots" content="index, follow" />
   <meta name="google-adsense-account" content="ca-pub-3718855174010446" />
-  <title>집중 타이머</title>
+  <title>집중 타이머 | 무료 온라인 시간 관리 도구</title>
   <script
     async
     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3718855174010446"
     crossorigin="anonymous"
   ></script>
+  <link rel="canonical" href="https://diamondssh.github.io/MVP_V1/" />
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
+  <header class="site-header">
+    <a class="brand" href="#timer" aria-label="집중 타이머 홈">집중 타이머</a>
+    <nav class="site-nav" aria-label="주요 메뉴">
+      <a href="#timer">타이머</a>
+      <a href="#guide">사용법</a>
+      <a href="#tips">집중 팁</a>
+      <a href="#privacy">개인정보</a>
+    </nav>
+  </header>
+
   <main>
-    <section class="timer-container" aria-labelledby="timerTitle">
-      <div class="title-row">
-        <div>
-          <h1 id="timerTitle">집중 타이머</h1>
-          <p class="subtitle">분과 초를 입력한 뒤 원하는 시간만큼 집중하세요.</p>
-        </div>
-
-        <div class="header-actions">
-          <button id="themeToggle" class="theme-toggle" type="button" aria-label="다크 모드로 변경">
-            <span id="themeIcon" aria-hidden="true">☀</span>
-            <span id="themeText">화이트</span>
-          </button>
-          <div id="status" class="status-pill" aria-live="polite">대기</div>
-        </div>
+    <section id="timer" class="hero-section" aria-labelledby="timerTitle">
+      <div class="hero-copy">
+        <p class="eyebrow">무료 온라인 시간 관리 도구</p>
+        <h1 id="timerTitle">지금 필요한 시간만 정하고 바로 집중하세요.</h1>
+        <p>
+          설치나 회원가입 없이 분과 초를 입력해 사용할 수 있는 간단한 타이머입니다.
+          공부, 업무, 운동, 휴식처럼 짧고 명확한 시간 관리가 필요한 순간에 맞춰 만들었습니다.
+        </p>
       </div>
 
-      <div class="timer-face" id="timerFace" aria-label="남은 시간">
-        <div id="timeDisplay" class="time-display" aria-live="polite">00:00</div>
-      </div>
+      <section class="timer-container" aria-label="타이머 도구">
+        <div class="title-row">
+          <div>
+            <h2>집중 타이머</h2>
+            <p class="subtitle">분과 초를 입력한 뒤 원하는 시간만큼 집중하세요.</p>
+          </div>
 
-      <div class="input-group">
-        <div>
-          <label for="minutes">분</label>
-          <input id="minutes" type="number" min="0" max="999" inputmode="numeric" placeholder="0" />
+          <div class="header-actions">
+            <button id="themeToggle" class="theme-toggle" type="button" aria-label="블랙 모드로 변경">
+              <span id="themeIcon" aria-hidden="true">☀</span>
+              <span id="themeText">화이트</span>
+            </button>
+            <div id="status" class="status-pill" aria-live="polite">대기</div>
+          </div>
         </div>
 
-        <div>
-          <label for="seconds">초</label>
-          <input id="seconds" type="number" min="0" max="59" inputmode="numeric" placeholder="0" />
+        <div class="timer-face" id="timerFace" aria-label="남은 시간">
+          <div id="timeDisplay" class="time-display" aria-live="polite">00:00</div>
         </div>
+
+        <div class="input-group">
+          <div>
+            <label for="minutes">분</label>
+            <input id="minutes" type="number" min="0" max="999" inputmode="numeric" placeholder="0" />
+          </div>
+
+          <div>
+            <label for="seconds">초</label>
+            <input id="seconds" type="number" min="0" max="59" inputmode="numeric" placeholder="0" />
+          </div>
+        </div>
+
+        <div class="button-group">
+          <button id="startBtn" class="start" type="button">시작</button>
+          <button id="pauseBtn" class="pause" type="button" disabled>일시정지</button>
+          <button id="resumeBtn" class="resume" type="button" disabled>계속</button>
+          <button id="resetBtn" class="reset" type="button">초기화</button>
+        </div>
+
+        <div id="message" class="message" role="status" aria-live="polite"></div>
+      </section>
+    </section>
+
+    <section id="guide" class="content-section" aria-labelledby="guideTitle">
+      <div class="section-heading">
+        <p class="eyebrow">사용법</p>
+        <h2 id="guideTitle">필요한 시간만 빠르게 설정합니다.</h2>
       </div>
 
-      <div class="button-group">
-        <button id="startBtn" class="start" type="button">시작</button>
-        <button id="pauseBtn" class="pause" type="button" disabled>일시정지</button>
-        <button id="resumeBtn" class="resume" type="button" disabled>계속</button>
-        <button id="resetBtn" class="reset" type="button">초기화</button>
+      <div class="info-grid">
+        <article>
+          <h3>1. 시간을 입력하세요</h3>
+          <p>분과 초 입력칸에 원하는 시간을 넣습니다. 초는 0부터 59 사이로 입력할 수 있습니다.</p>
+        </article>
+        <article>
+          <h3>2. 시작하고 집중하세요</h3>
+          <p>시작 버튼을 누르면 입력칸이 잠기고 남은 시간이 원형 진행률과 함께 표시됩니다.</p>
+        </article>
+        <article>
+          <h3>3. 필요하면 멈추세요</h3>
+          <p>일시정지와 계속 버튼으로 흐름을 조절할 수 있고, 초기화 버튼으로 즉시 처음 상태로 돌아갑니다.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="tips" class="content-section" aria-labelledby="tipsTitle">
+      <div class="section-heading">
+        <p class="eyebrow">집중 팁</p>
+        <h2 id="tipsTitle">타이머를 더 유용하게 쓰는 방법</h2>
       </div>
 
-      <div id="message" class="message" role="status" aria-live="polite"></div>
+      <div class="text-columns">
+        <article>
+          <h3>짧은 집중 구간부터 시작하기</h3>
+          <p>
+            처음부터 긴 시간을 잡기보다 10분 또는 25분처럼 부담 없는 구간으로 시작해 보세요.
+            짧은 성공 경험이 쌓이면 다음 집중 구간을 더 자연스럽게 이어갈 수 있습니다.
+          </p>
+        </article>
+        <article>
+          <h3>작업을 하나로 좁히기</h3>
+          <p>
+            타이머를 시작하기 전에 이번 구간에서 끝낼 일을 한 문장으로 정해두면 집중 시간이 흐려지지 않습니다.
+            예를 들어 “문제 5개 풀기”, “메일 답장 정리”처럼 구체적인 목표가 좋습니다.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="content-section" aria-labelledby="qualityTitle">
+      <div class="section-heading">
+        <p class="eyebrow">사이트 안내</p>
+        <h2 id="qualityTitle">이 사이트가 제공하는 가치</h2>
+      </div>
+
+      <div class="info-grid">
+        <article>
+          <h3>명확한 기능</h3>
+          <p>이 사이트는 온라인 타이머라는 약속한 기능을 첫 화면에서 바로 제공합니다.</p>
+        </article>
+        <article>
+          <h3>쉬운 탐색</h3>
+          <p>상단 메뉴를 통해 타이머, 사용법, 집중 팁, 개인정보 안내를 빠르게 찾을 수 있습니다.</p>
+        </article>
+        <article>
+          <h3>접근성 고려</h3>
+          <p>상태 메시지와 남은 시간을 보조 기술이 감지할 수 있도록 실시간 영역을 설정했습니다.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="content-section" aria-labelledby="faqTitle">
+      <div class="section-heading">
+        <p class="eyebrow">FAQ</p>
+        <h2 id="faqTitle">자주 묻는 질문</h2>
+      </div>
+
+      <div class="faq-list">
+        <details>
+          <summary>타이머 사용에 회원가입이 필요한가요?</summary>
+          <p>아니요. 이 사이트는 회원가입 없이 브라우저에서 바로 사용할 수 있습니다.</p>
+        </details>
+        <details>
+          <summary>화이트 모드와 블랙 모드 설정은 저장되나요?</summary>
+          <p>네. 선택한 테마는 현재 브라우저의 로컬 저장소에 저장되어 다음 방문 때도 유지됩니다.</p>
+        </details>
+        <details>
+          <summary>광고가 표시될 수 있나요?</summary>
+          <p>AdSense 승인 및 설정 상태에 따라 광고가 표시될 수 있습니다. 광고는 타이머 조작을 방해하지 않는 위치에만 배치할 계획입니다.</p>
+        </details>
+      </div>
+    </section>
+
+    <section id="privacy" class="content-section" aria-labelledby="privacyTitle">
+      <div class="section-heading">
+        <p class="eyebrow">개인정보 및 광고</p>
+        <h2 id="privacyTitle">개인정보 처리 및 광고 안내</h2>
+      </div>
+
+      <div class="policy-box">
+        <p>
+          집중 타이머는 회원가입, 이름, 이메일, 결제 정보 같은 직접 식별 정보를 요구하지 않습니다.
+          타이머 설정과 테마 선택은 사용자의 브라우저 안에서만 처리됩니다.
+        </p>
+        <p>
+          이 사이트는 Google AdSense를 사용할 수 있으며, Google과 제휴사는 쿠키 또는 유사 기술을 사용해 광고를 제공할 수 있습니다.
+          사용자는 브라우저 설정 또는 Google 광고 설정에서 개인 맞춤 광고 관련 선택을 관리할 수 있습니다.
+        </p>
+        <p>
+          문의나 수정 요청은 GitHub 저장소 이슈를 통해 남길 수 있습니다.
+          사이트 운영 목적과 맞지 않는 광고 클릭 유도, 오해를 부르는 콘텐츠, 중복 페이지 생성을 지양합니다.
+        </p>
+      </div>
     </section>
   </main>
+
+  <footer class="site-footer">
+    <p>© 2026 집중 타이머. 공부와 업무를 위한 무료 온라인 타이머.</p>
+    <a href="https://github.com/diamondssh/MVP_V1" rel="noopener noreferrer">GitHub 저장소</a>
+  </footer>
 
   <script src="script.js"></script>
 </body>
